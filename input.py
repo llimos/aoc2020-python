@@ -5,3 +5,6 @@ def get(puzzle):
 
 def lines(puzzle):
     return get(puzzle).rstrip().split('\n')
+
+def ints(puzzle):
+    return [int(x) for x in lines(puzzle)]
