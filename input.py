@@ -8,3 +8,6 @@ def lines(puzzle):
 
 def ints(puzzle):
     return [int(x) for x in lines(puzzle)]
+
+def floats(puzzle):
+    return [float(x) for x in lines(puzzle)]
