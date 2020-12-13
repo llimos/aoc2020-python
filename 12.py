@@ -31,11 +31,10 @@ for dir in directions:
         facing = (360 + facing - amount) % 360
 
 
-print(pos, abs(pos[0])+abs(pos[1]))
+print(abs(pos[0])+abs(pos[1]))
 
 
 waypoint = [10, 1]
-facing = 0 # degrees from east
 pos = [0, 0] # east, north
 for dir in directions:
     inst = dir[0]
@@ -49,9 +48,43 @@ for dir in directions:
     elif inst == 'W':
         waypoint[0] -= amount
     elif inst == 'F':
-        pos[0] = waypoint[0] * amount
-        pos[1] = waypoint[1] * amount
-    elif inst == 'R':
-        
-    elif inst == 'L':
-        
+        pos[0] += waypoint[0] * amount
+        pos[1] += waypoint[1] * amount
+    elif inst in ['L','R'] and amount == 180:
+        waypoint[0] *= -1
+        waypoint[1] *= -1
+    elif (inst == 'R' and amount == 90) or (inst == 'L' and amount == 270):
+        waypoint = [
+            waypoint[1],
+            -waypoint[0]
+        ]
+    elif (inst == 'R' and amount == 270) or (inst == 'L' and amount == 90):
+        waypoint = [
+            -waypoint[1],
+            waypoint[0]
+        ]
+    
+print(abs(pos[0])+abs(pos[1]))
+
+
+"""
+R90
+N | E | N' | E'
++   +   -    +
+-   +   -    -
+-   -   +    -
++   -   +    +
+
+N' = reverse of E
+E' = N
+
+L90
+N | E | N' | E'
++   +   +    -
++   -   -    -
+-   -   -    +
+-   +   +    +
+
+N' = E
+E' = reverse of N
+"""
